@@ -79,7 +79,7 @@ def func_4():
     
     y_asymptote = [None]
     
-    obl_asymptote = (0, -1, -1)
+    obl_asymptote = (1, -1, -1)
     
     label = f"$x = {x_asymptote} \ \ y = {y_asymptote} \ \ y = -x$"
     

@@ -39,16 +39,16 @@ class DataContainer:
         
         obl_asymptote = kwargs.pop("obl_asymptote", None)
         
+        self.y[:-1][np.abs(np.diff(self.y)) > 20] = np.nan
+        
         if y_asymptote[0] is not None:
-          
-          # print(y_asymptote)
-          # horizontal asymptote
+
           for y_as in y_asymptote:
 
-              ax.axhline(y=y_as, color="red", linestyle="--")
+               ax.axhline(y=y_as, color="red", linestyle="--")
           
-              ax.plot(self.x, np.ma.masked_where(self.y > y_as-0.01, self.y), **kwargs)
-              ax.plot(self.x, np.ma.masked_where(self.y < y_as+0.01, self.y), **kwargs)
+               ax.plot(self.x, np.ma.masked_where(self.y > y_as, self.y), **kwargs)
+               ax.plot(self.x, np.ma.masked_where(self.y < y_as, self.y), **kwargs)
         
         if x_asymptote[0] is not None:
             
@@ -58,14 +58,19 @@ class DataContainer:
                 ax.axvline(x=x_as, color="red", linestyle="--")
                 
                 if y_asymptote[0] is None:
-
+                    
                     ax.plot(self.x, np.ma.masked_where(self.x > x_as-0.01, self.y), **kwargs)
-                    ax.plot(self.x, np.ma.masked_where(self.x < x_as+0.01, self.y), **kwargs)    
+                    ax.plot(self.x, np.ma.masked_where(self.x < x_as+0.01, self.y), **kwargs)
+
+                    # ax.plot(self.x, np.ma.masked_where(self.y > 20, self.y), **kwargs)  
+                    
+                    # ax.plot(self.x, np.ma.masked_where(self.y < 20, self.y), **kwargs)  
  
         if obl_asymptote is not None:
 
             ax.axline((obl_asymptote[0],obl_asymptote[1]), slope=obl_asymptote[2], color="red", linestyle="--")
         
+    
         ax.set_xlabel('x', fontsize=12)
         
         ax.set_ylabel('y', fontsize=12)
