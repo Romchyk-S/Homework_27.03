@@ -7,6 +7,8 @@ Created on Tue Mar  5 16:27:29 2024
 
 import numpy as np
 
+# function analysis available here: https://colab.research.google.com/drive/1RooJiqREUI2_NLi0M62DsQAQKWMT2xLv#scrollTo=sJZn_h5EbLfi
+
 def func_0():
     
     x = np.arange(-10, 10, 0.1)    
