@@ -9,8 +9,7 @@ Created on Tue Mar  5 16:27:17 2024
 import matplotlib.pyplot as plt
 
 import numpy as np
-    
-    
+
 
 class DataContainer:
  
@@ -41,8 +40,9 @@ class DataContainer:
         
         self.y[:-1][np.abs(np.diff(self.y)) > 20] = np.nan
         
-        if y_asymptote[0] is not None:
+        if y_asymptote is not None:
 
+          # horizontal asymptote
           for y_as in y_asymptote:
 
                ax.axhline(y=y_as, color="red", linestyle="--")
@@ -50,7 +50,7 @@ class DataContainer:
                ax.plot(self.x, np.ma.masked_where(self.y > y_as, self.y), **kwargs)
                ax.plot(self.x, np.ma.masked_where(self.y < y_as, self.y), **kwargs)
         
-        if x_asymptote[0] is not None:
+        if x_asymptote is not None:
             
             # vertical asymptote
             for x_as in x_asymptote:
@@ -65,6 +65,10 @@ class DataContainer:
                     # ax.plot(self.x, np.ma.masked_where(self.y > 20, self.y), **kwargs)  
                     
                     # ax.plot(self.x, np.ma.masked_where(self.y < 20, self.y), **kwargs)  
+                    
+        elif x_asymptote is None and y_asymptote is None:
+             
+             ax.plot(self.x, self.y, **kwargs)
  
         if obl_asymptote is not None:
 
